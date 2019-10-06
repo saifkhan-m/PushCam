@@ -1,2 +1,2 @@
 # PushCam
-Senses the push and start the camera.
+Senses the push or force using accelerometer and start the camera.
