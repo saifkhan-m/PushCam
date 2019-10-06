@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PushCam</string>
+    <string name="camera2_permission_message">Permissions needed to use your camera</string>
+</resources>
