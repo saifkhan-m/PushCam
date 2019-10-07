@@ -111,9 +111,11 @@ public class CaptureFragment extends Camera2Fragment implements Camera2Listener,
             stopRecordingVideo();
             starred = false;
         } else if (!isRecording() || sensorValue > GVal) {
-            if(!(sensorValue > GVal))
+            if(!(sensorValue > GVal)) {
                 Toast.makeText(getActivity().getApplicationContext(), "Recording started", Toast.LENGTH_SHORT).show();
-            view.setImageResource(R.drawable.startapp);
+                view.setImageResource(R.drawable.startapp);
+            }else
+                view.setImageResource(R.drawable.startbyg);
             starred = true;
             startRecordingVideo();
         }
