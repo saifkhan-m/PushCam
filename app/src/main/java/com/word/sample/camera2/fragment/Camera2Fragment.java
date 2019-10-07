@@ -407,7 +407,7 @@ public abstract class Camera2Fragment extends Fragment implements Camera2Listene
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mMediaRecorder.setMaxDuration(1800000);//half an hour
+        mMediaRecorder.setMaxDuration(600000);//10 mins
         mMediaRecorder.setOutputFile(file.getAbsolutePath());
         mMediaRecorder.setVideoEncodingBitRate(1600 * 1000);
         mMediaRecorder.setVideoFrameRate(30);

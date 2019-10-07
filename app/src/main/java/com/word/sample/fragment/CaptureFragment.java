@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class CaptureFragment extends Camera2Fragment implements Camera2Listener, SensorEventListener {
 
-    private static final String VIDEO_DIRECTORY_NAME = "RoadWatch";
+    private static final String VIDEO_DIRECTORY_NAME = "PushCam";
     private static double GVal = 3;
     public boolean starred = false;
     View mainview;
