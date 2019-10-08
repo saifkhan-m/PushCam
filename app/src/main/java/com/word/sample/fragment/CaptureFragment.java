@@ -38,14 +38,24 @@ public class CaptureFragment extends Camera2Fragment implements Camera2Listener,
     Double G;
     float x, y, z, stdG;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRationaleMessage("Hey man, we need to use your camera please!");
+
+        /*
+        the resources below were used to set up the sensor manager and other related aspects of the sensor
+
+        https://developer.android.com/reference/android/hardware/SensorManager
+        https://developer.android.com/guide/topics/sensors/sensors_motion.html#sensors-motion-grav
+         */
+
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, sensor, sensorManager.SENSOR_DELAY_NORMAL);
     }
+
 
     @Nullable
     @Override
@@ -136,12 +146,18 @@ public class CaptureFragment extends Camera2Fragment implements Camera2Listener,
 //        onCameraControlClick1();
 //    }
 
+
+
+    /*
+    The below resources were used to capture data from the sensor event onSensorChanged
+
+    https://developer.android.com/reference/android/hardware/SensorEvent
+    https://www.youtube.com/watch?v=pkT7DU1Yo9Q&list=PLc2rvfiptPSQrErIlwHz7DZrNfhFdDXa6&index=2&t=0s
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        //CaptureFragment captureFragment=(CaptureFragment) getSupportFragmentManager().getFragments().get(0);
-        //Log.d(TAG, "onSensorChanged: X:"+sensorEvent.values[0]+",  Y: "+sensorEvent.values[1]+",  Z: "+sensorEvent.values[2]);
+
         G = calcG(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2], SensorManager.STANDARD_GRAVITY);
-        //Log.i(TAG, "calcG: recorded Gs: "+G);
 
         if (G > GVal && !starred) {
             Toast.makeText(getActivity().getApplicationContext(), "Recording started due to high G ", Toast.LENGTH_SHORT).show();
@@ -153,6 +169,14 @@ public class CaptureFragment extends Camera2Fragment implements Camera2Listener,
     public void onAccuracyChanged(Sensor sensor, int i) {
     }
 
+
+
+    /*
+    The 2 resources below were used for the formula to get the value of G out of the x,y and z inputs
+
+    https://stackoverflow.com/questions/11205930/what-is-a-maximum-g-force-value-possible-to-simulate-with-a-phone-in-a-hand
+    https://stackoverflow.com/questions/6291931/how-to-calculate-g-force-using-x-y-z-values-from-the-accelerometer-in-android
+     */
     double calcG(float x, float y, float z, float stdG) {
         return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))) / stdG;
     }
